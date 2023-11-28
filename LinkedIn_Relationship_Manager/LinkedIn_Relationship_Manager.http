@@ -1,0 +1,6 @@
+@LinkedIn_Relationship_Manager_HostAddress = http://localhost:5019
+
+GET {{LinkedIn_Relationship_Manager_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
