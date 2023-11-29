@@ -1,4 +1,4 @@
-﻿namespace LinkedIn_Relationship_Manager.Interfaces
+﻿namespace LinkedIn_Relationship_Manager.Repositories.Interfaces
 {
     public interface IMessage
     {
@@ -9,9 +9,9 @@
 
         DateTime CreatedAt { get; set; }
 
-        string Subject { get; set; }    
+        string Subject { get; set; }
 
-        string Recipient { get; set; }  
+        string Recipient { get; set; }
 
         string Status { get; set; }
 

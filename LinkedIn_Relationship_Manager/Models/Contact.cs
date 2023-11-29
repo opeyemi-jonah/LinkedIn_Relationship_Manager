@@ -1,4 +1,4 @@
-﻿using LinkedIn_Relationship_Manager.Interfaces;
+﻿using LinkedIn_Relationship_Manager.Repositories.Interfaces;
 
 namespace LinkedIn_Relationship_Manager.Models
 {

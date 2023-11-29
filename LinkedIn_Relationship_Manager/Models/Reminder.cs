@@ -1,15 +1,15 @@
-﻿using LinkedIn_Relationship_Manager.Interfaces;
+﻿using LinkedIn_Relationship_Manager.Repositories.Interfaces;
 
 namespace LinkedIn_Relationship_Manager.Models
 {
     public class Reminder : IReminder
     {
-        public ulong ReminderId { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string Title { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public DateTime ScheduledAt { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public DateTime CreatedAt { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public DateTime UpdatedAt { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public DateTime TriggeredAt { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string Status { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int ReminderId { get; set; }
+        public required string Title { get; set; }
+        public DateTime ScheduledAt { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime UpdatedAt { get; set; }
+        public DateTime TriggeredAt { get; set; }
+        public required string Status { get; set; }
     }
 }

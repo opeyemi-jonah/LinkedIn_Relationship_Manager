@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace LinkedIn_Relationship_Manager.Interfaces
+namespace LinkedIn_Relationship_Manager.Repositories.Interfaces
 {
     public interface ILinkedInAccount
     {
-        Guid UserId {  get; set; }
+        Guid UserId { get; set; }
 
         int LinkedInAccountId { get; set; }
 

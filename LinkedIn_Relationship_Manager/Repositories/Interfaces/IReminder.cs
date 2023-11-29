@@ -1,8 +1,8 @@
-﻿namespace LinkedIn_Relationship_Manager.Interfaces
+﻿namespace LinkedIn_Relationship_Manager.Repositories.Interfaces
 {
     public interface IReminder
     {
-        UInt64 ReminderId { get; set; }
+        int ReminderId { get; set; }
 
         string Title { get; set; }
 
