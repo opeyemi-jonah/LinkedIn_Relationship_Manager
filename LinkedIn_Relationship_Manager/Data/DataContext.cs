@@ -26,12 +26,19 @@ namespace LinkedIn_Relationship_Manager.DBContext
         // Additional configuration and methods can be added here
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().ToTable("Users");
-            modelBuilder.Entity<Contact>().ToTable("Contacts");
-            modelBuilder.Entity<LinkedInAccount>().ToTable("LinkedInAccounts");
-            modelBuilder.Entity<Message>().ToTable("Messages");
-            modelBuilder.Entity<ReminderContact>().ToTable("ReminderContacts");
-            modelBuilder.Entity<Reminder>().ToTable("Reminders");
+
+            modelBuilder.Entity<ReminderContact>().HasKey(rc => new
+            {
+                rc.ReminderId,
+                rc.UserId,
+                rc.ContactId
+            });
+
+            modelBuilder.Entity<ReminderContact>().HasOne(usr => usr.User).WithMany(rc => rc.ReminderContacts).HasForeignKey(usr => usr.UserId);
+            modelBuilder.Entity<ReminderContact>().HasOne(usr => usr.Contact).WithMany(rc => rc.ReminderContacts).HasForeignKey(usr => usr.ContactId);
+            modelBuilder.Entity<ReminderContact>().HasOne(usr => usr.Reminder).WithMany(rc => rc.ReminderContacts).HasForeignKey(usr => usr.ReminderId);
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
