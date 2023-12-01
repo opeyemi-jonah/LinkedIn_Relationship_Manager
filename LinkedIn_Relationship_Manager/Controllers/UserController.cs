@@ -27,7 +27,7 @@ namespace LinkedIn_Relationship_Manager.Controllers
         }
 
         [HttpGet("{id}")] //or [Route("{id}")]
-        public ActionResult<List<User>> GetUserByUserId(string id)
+        public ActionResult<List<User>> GetUserByUserId(int id)
         {
             var users = _userrepo.GetUserByUserId(id);
             if (users is null)

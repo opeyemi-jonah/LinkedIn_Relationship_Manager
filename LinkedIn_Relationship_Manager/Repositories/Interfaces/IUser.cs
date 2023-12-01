@@ -14,7 +14,7 @@ namespace LinkedIn_Relationship_Manager.Repositories.Interfaces
 
         IEnumerable<User> GetAllUsers();
 
-        User GetUserByUserId(string id);
+        User GetUserByUserId(int id);
 
         string CreateUser(User user);
 

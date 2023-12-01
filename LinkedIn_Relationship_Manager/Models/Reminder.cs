@@ -1,4 +1,5 @@
 ﻿using LinkedIn_Relationship_Manager.Repositories.Interfaces;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LinkedIn_Relationship_Manager.Models
 {
@@ -17,7 +18,8 @@ namespace LinkedIn_Relationship_Manager.Models
         public List<ReminderContact>? ReminderContacts { get; set; }
 
         //User
-        public Guid UserId { get; set; }
+        [ForeignKey("UserId")]
+        public int UserId { get; set; }
         public User? User { get; set; }
 
         //Contact

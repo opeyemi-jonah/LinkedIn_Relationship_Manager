@@ -19,10 +19,5 @@ namespace LinkedIn_Relationship_Manager.Models
         //Relationships
         public List<ReminderContact>? ReminderContacts { get; set; }
 
-        //User
-        [ForeignKey(nameof(UserId))]
-        public Guid UserId { get; set; }
-        public User? User { get; set; }
-
     }
 }

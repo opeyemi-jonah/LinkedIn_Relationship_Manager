@@ -36,7 +36,7 @@ namespace LinkedIn_Relationship_Manager.DBContext
 
             modelBuilder.Entity<ReminderContact>().HasOne(usr => usr.User).WithMany(rc => rc.ReminderContacts).HasForeignKey(usr => usr.UserId);
             modelBuilder.Entity<ReminderContact>().HasOne(usr => usr.Contact).WithMany(rc => rc.ReminderContacts).HasForeignKey(usr => usr.ContactId);
-            modelBuilder.Entity<ReminderContact>().HasOne(usr => usr.Reminder).WithMany(rc => rc.ReminderContacts).HasForeignKey(usr => usr.ReminderId);
+            modelBuilder.Entity<ReminderContact>().HasOne(usr => usr.Reminder).WithMany(rc => rc.ReminderContacts).HasForeignKey(usr => usr.ReminderId).OnDelete(DeleteBehavior.NoAction);
 
             base.OnModelCreating(modelBuilder);
         }

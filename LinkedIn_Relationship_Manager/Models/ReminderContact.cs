@@ -1,12 +1,14 @@
-﻿using LinkedIn_Relationship_Manager.Repositories.Interfaces;
+﻿
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 
 namespace LinkedIn_Relationship_Manager.Models
 {
     public class ReminderContact
     {
-        public int ReminderContactId { get; set; }
-        public Guid UserId { get; set; }
+
+        public int UserId { get; set; }
         public User? User { get; set; }
 
         public int ReminderId { get; set; }

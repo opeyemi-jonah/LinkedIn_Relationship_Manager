@@ -20,14 +20,14 @@ namespace LinkedIn_Relationship_Manager.Repositories.Implementation
             {
                 _context.Users.Add(user);
                 _context.SaveChanges();
-                result = user.UserId;
+                result = user.UserId.ToString();
             }
             return result;
         }
 
         public string DeleteUser(User user)
         {
-            var usr = _context.Users.Where(user => user.UserId.ToString() == user.UserId.ToString()).FirstOrDefault() ?? null;
+            var usr = _context.Users.Where(user => user.UserId == user.UserId).FirstOrDefault() ?? null;
             if (usr != null)
             {
                 _context.Remove(usr);
@@ -44,15 +44,15 @@ namespace LinkedIn_Relationship_Manager.Repositories.Implementation
             return users;
         }
 
-        public User GetUserByUserId(string id)
+        public User GetUserByUserId(int id)
         {
-            var user = _context.Users.Where(user => user.UserId.ToString() == id).FirstOrDefault() ?? null;
+            var user = _context.Users.Where(user => user.UserId == id).FirstOrDefault() ?? null;
             return user;
         }
 
         public string UpdateUser(User user)
         {
-            var usr = _context.Users.Where(user => user.UserId.ToString() == user.UserId.ToString()).FirstOrDefault() ?? null;
+            var usr = _context.Users.Where(user => user.UserId == user.UserId).FirstOrDefault() ?? null;
 
             if (usr != null)
             {

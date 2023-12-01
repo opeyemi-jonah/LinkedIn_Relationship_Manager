@@ -1,10 +1,11 @@
 ﻿using LinkedIn_Relationship_Manager.Repositories.Interfaces;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LinkedIn_Relationship_Manager.Models
 {
     public class Message
     {
-        public Guid? MessageId => new();
+        public int MessageId { get; set; }
 
         public required string Body { get; set; }
         public DateTime SendDate { get; set; }
@@ -15,7 +16,5 @@ namespace LinkedIn_Relationship_Manager.Models
         public string? MessageType { get; set; }
         public string? Comments { get; set; }
 
-        //Relationship
-        public User? User { get; set; }
     }
 }
