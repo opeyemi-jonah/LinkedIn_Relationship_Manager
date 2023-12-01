@@ -1,17 +1,28 @@
 ﻿using LinkedIn_Relationship_Manager.Repositories.Interfaces;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LinkedIn_Relationship_Manager.Models
 {
-    public class Contact : IContacts
+    public class Contact
     {
-        public int ContactId { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string Firstname { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string Lastname { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string Email { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string PhoneNumber { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string ProfileLink { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string JobTitle { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string JobDescription { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string Company { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public int ContactId { get; set; }
+        public string Firstname { get; set; } = string.Empty;
+        public string? Lastname { get; set; }
+        public string? Email { get; set; }
+        public string? PhoneNumber { get; set; }
+        public  string ProfileLink { get; set; } = string.Empty;
+        public  string JobTitle { get; set; } = string.Empty;
+        public string? JobDescription { get; set; }
+        public string? Company { get; set; }
+
+        //Relationships
+        public List<ReminderContact>? ReminderContacts { get; set; }
+
+        //User
+        [ForeignKey(nameof(UserId))]
+        public Guid UserId { get; set; }
+        public User? User { get; set; }
+
     }
 }
