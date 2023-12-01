@@ -1,5 +1,4 @@
-﻿using LinkedIn_Relationship_Manager.Interfaces;
-using LinkedIn_Relationship_Manager.Models;
+﻿using LinkedIn_Relationship_Manager.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace LinkedIn_Relationship_Manager.DBContext

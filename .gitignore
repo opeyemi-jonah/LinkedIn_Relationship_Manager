@@ -31,7 +31,7 @@ x86/
 [Aa][Rr][Mm]64/
 bld/
 [Bb]in/
-[Oo]bj/
+obj/
 [Ll]og/
 [Ll]ogs/
 
@@ -485,3 +485,10 @@ $RECYCLE.BIN/
 # Vim temporary swap files
 *.swp
 LinkedIn_Relationship_Manager/obj/
+LinkedIn_Relationship_Manager/appsettings.Development.json
+LinkedIn_Relationship_Manager/appsettings.Development.json
+LinkedIn_Relationship_Manager/LinkedIn_Relationship_Manager.csproj
+LinkedIn_Relationship_Manager/obj/LinkedIn_Relationship_Manager.csproj.nuget.dgspec.json
+LinkedIn_Relationship_Manager/obj/LinkedIn_Relationship_Manager.csproj.nuget.dgspec.json
+LinkedIn_Relationship_Manager/obj/Debug/net8.0/LinkedIn_Relationship_Manager.csproj.AssemblyReference.cache
+LinkedIn_Relationship_Manager/obj/Debug/net8.0/LinkedIn_Relationship_Manager.assets.cache
