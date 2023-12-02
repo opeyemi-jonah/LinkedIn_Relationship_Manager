@@ -34,9 +34,21 @@ namespace LinkedIn_Relationship_Manager.DBContext
                 rc.ContactId
             });
 
-            modelBuilder.Entity<ReminderContact>().HasOne(usr => usr.User).WithMany(rc => rc.ReminderContacts).HasForeignKey(usr => usr.UserId);
-            modelBuilder.Entity<ReminderContact>().HasOne(usr => usr.Contact).WithMany(rc => rc.ReminderContacts).HasForeignKey(usr => usr.ContactId);
-            modelBuilder.Entity<ReminderContact>().HasOne(usr => usr.Reminder).WithMany(rc => rc.ReminderContacts).HasForeignKey(usr => usr.ReminderId).OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<ReminderContact>()
+            .HasOne(rc => rc.User)
+            .WithMany(u => u.ReminderContacts)
+            .HasForeignKey(rc => rc.UserId);
+
+            modelBuilder.Entity<ReminderContact>()
+                .HasOne(rc => rc.Contact)
+                .WithMany(c => c.ReminderContacts)
+                .HasForeignKey(rc => rc.ContactId);
+
+            modelBuilder.Entity<ReminderContact>()
+                .HasOne(rc => rc.Reminder)
+                .WithMany(r => r.ReminderContacts)
+                .HasForeignKey(rc => rc.ReminderId).OnDelete(DeleteBehavior.NoAction);
+
 
             base.OnModelCreating(modelBuilder);
         }
