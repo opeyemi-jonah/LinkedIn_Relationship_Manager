@@ -17,7 +17,7 @@ namespace LinkedIn_Relationship_Manager.Models
         public string? Comments { get; set; }
 
         //Relationship
-        public virtual List<UserMessage> UserMessages { get; set; }  
+        public virtual List<UserMessage>? UserMessages { get; set; }  
 
     }
 }

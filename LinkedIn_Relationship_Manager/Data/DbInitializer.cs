@@ -40,9 +40,9 @@ namespace LinkedIn_Relationship_Manager.Data
 
             var contacts = new Contact[]
             {
-                new Contact{Firstname="Joey", Lastname = "Sheen", Company = "Microsoft", Email="jsheen@microsoft.com", JobDescription="Makes good software look amazing", JobTitle="Software Engineer", ProfileLink="https://www.linkedin.com/in/opeyemi-jonah/"}
-                new Contact{Firstname="Darman", Lastname = "Rah", Company = "Google", Email="dman@google.com", JobDescription="Testing new features and deployment to production", JobTitle="QA Engineer", ProfileLink="https://www.linkedin.com/in/opeyemi-jonah/"}
-                new Contact{Firstname="Sandra", Lastname = "Lewiski", Company = "Go Go Gadgets", Email="sandraLewiski@gogogadgets.com", JobDescription="Customer outreach and sales operations analyst", JobTitle="Sales Manager", ProfileLink="https://www.linkedin.com/in/opeyemi-jonah/"}
+                new Contact{Firstname="Joey", Lastname = "Sheen", Company = "Microsoft", Email="jsheen@microsoft.com", JobDescription="Makes good software look amazing", JobTitle="Software Engineer", ProfileLink="https://www.linkedin.com/in/opeyemi-jonah/"},
+            new Contact { Firstname = "Darman", Lastname = "Rah", Company = "Google", Email = "dman@google.com", JobDescription = "Testing new features and deployment to production", JobTitle = "QA Engineer", ProfileLink = "https://www.linkedin.com/in/opeyemi-jonah/" },
+            new Contact { Firstname = "Sandra", Lastname = "Lewiski", Company = "Go Go Gadgets", Email = "sandraLewiski@gogogadgets.com", JobDescription = "Customer outreach and sales operations analyst", JobTitle = "Sales Manager", ProfileLink = "https://www.linkedin.com/in/opeyemi-jonah/" }
             };
             foreach(Contact contact in contacts)
             {
