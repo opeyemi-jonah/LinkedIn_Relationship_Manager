@@ -15,9 +15,11 @@ namespace LinkedIn_Relationship_Manager.DBContext
 
         public DbSet<ReminderContact> ReminderContacts { get; set; }
 
+        public DbSet<UserMessage> UserMessages { get; set; }
 
-    // Constructor that takes DbContextOptions as a parameter
-    public DataContext(DbContextOptions<DataContext> options) : base(options)
+
+        // Constructor that takes DbContextOptions as a parameter
+        public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
 
         }
@@ -48,6 +50,22 @@ namespace LinkedIn_Relationship_Manager.DBContext
                 .HasOne(rc => rc.Reminder)
                 .WithMany(r => r.ReminderContacts)
                 .HasForeignKey(rc => rc.ReminderId).OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<UserMessage>().HasKey(um => new
+            {
+                um.UserId,
+                um.MessageId
+            });
+
+            modelBuilder.Entity<UserMessage>()
+                .HasOne(um => um.User)
+                .WithMany(u => u.UserMessages)
+                .HasForeignKey(u => u.UserId);
+
+            modelBuilder.Entity<UserMessage>()
+                .HasOne(um => um.Message)
+                .WithMany(m => m.UserMessages)
+                .HasForeignKey(um => um.MessageId);
 
 
             base.OnModelCreating(modelBuilder);

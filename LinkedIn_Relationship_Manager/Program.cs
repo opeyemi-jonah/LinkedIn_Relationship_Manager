@@ -1,3 +1,4 @@
+using LinkedIn_Relationship_Manager.Data;
 using LinkedIn_Relationship_Manager.DBContext;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +13,8 @@ builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(conne
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -19,6 +22,20 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    
+    //Adding the DbInitializer on startup
+    try
+    {
+        var context =  app.Services.GetRequiredService<DataContext>();
+        DbInitializer.Initialize(context);
+    }
+    catch (Exception ex)
+    {
+        var logger = app.Services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An error occurred creating the DB.");
+    }
+   
+
 }
 
 app.UseHttpsRedirection();

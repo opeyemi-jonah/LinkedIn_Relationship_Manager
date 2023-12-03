@@ -18,7 +18,7 @@ namespace LinkedIn_Relationship_Manager.Models
         public virtual List<ReminderContact>? ReminderContacts { get; set; }
         public virtual List<LinkedInAccount>? LinkedInAccounts { get; set; }
 
-        public virtual List<Message>? Messages { get; set; }
+        public virtual List<UserMessage>? UserMessages { get; set; }
 
 
     }
