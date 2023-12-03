@@ -20,20 +20,6 @@ namespace LinkedIn_Relationship_Manager.Models
 
         public virtual List<Message>? Messages { get; set; }
 
-        ////Reminder
-        //public virtual Reminder? Reminder { get; set; }
-        //public int ReminderId { get; set; }
-
-        ////Contact
-        //public int ContactId { get; set; }
-        //public virtual Contact? Contact { get; set; }
-
-        ////Message
-        //public int MessageId { get; set; }
-        //public Message? Message { get; set; }
-
-
-
 
     }
 }
