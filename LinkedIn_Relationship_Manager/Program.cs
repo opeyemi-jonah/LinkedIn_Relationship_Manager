@@ -26,8 +26,12 @@ if (app.Environment.IsDevelopment())
     //Adding the DbInitializer on startup
     try
     {
-        var context =  app.Services.GetRequiredService<DataContext>();
-        DbInitializer.Initialize(context);
+        // Use a scope to resolve DataContext within the request scope
+        using (var scope = app.Services.CreateScope())
+        {
+            var dbContext = scope.ServiceProvider.GetRequiredService<DataContext>();
+            DbInitializer.Initialize(dbContext);
+        }
     }
     catch (Exception ex)
     {
