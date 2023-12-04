@@ -1,5 +1,8 @@
+using FluentAssertions.Common;
 using LinkedIn_Relationship_Manager.Data;
 using LinkedIn_Relationship_Manager.DBContext;
+using LinkedIn_Relationship_Manager.Repositories.Implementation;
+using LinkedIn_Relationship_Manager.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +15,9 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// In your Startup.cs or ConfigureServices method
+builder.Services.AddScoped<IUser, UserRepository>();
 
 
 
@@ -38,7 +44,7 @@ if (app.Environment.IsDevelopment())
         var logger = app.Services.GetRequiredService<ILogger<Program>>();
         logger.LogError(ex, "An error occurred creating the DB.");
     }
-   
+
 
 }
 

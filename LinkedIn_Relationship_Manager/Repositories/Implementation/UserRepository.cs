@@ -1,73 +1,77 @@
-﻿using LinkedIn_Relationship_Manager.DBContext;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection.Metadata.Ecma335;
+using System.Threading.Tasks;
+using LinkedIn_Relationship_Manager.DBContext;
 using LinkedIn_Relationship_Manager.Models;
 using LinkedIn_Relationship_Manager.Repositories.Interfaces;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.EntityFrameworkCore;
 
 namespace LinkedIn_Relationship_Manager.Repositories.Implementation
 {
-    public class UserRepository(DataContext db) : IUser
+    public class UserRepository(DataContext context) : IUser
     {
-        private readonly DataContext _context = db;
+        private readonly DataContext _context = context ?? throw new ArgumentNullException(nameof(context));
 
-        public string CreateUser(User user)
+        public async Task<IEnumerable<User>> GetAllUsersAsync()
         {
-            string result;
+            return await _context.Users.ToListAsync();
+        }
+
+        public async Task<User?> GetUserByUserIdAsync(int id)
+        {
+            return await _context.Users.FirstOrDefaultAsync(user => user.UserId == id);
+        }
+
+        public async Task<int> CreateUserAsync(User user)
+        {
             if (user == null)
             {
-                return "No User";
+                throw new ArgumentNullException(nameof(user));
             }
 
-            else
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
+
+            return user.UserId; // Assuming UserId is an integer
+        }
+
+        public async Task<bool> UpdateUserAsync(User user)
+        {
+            var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.UserId == user.UserId);
+
+            if (existingUser != null)
             {
-                _context.Users.Add(user);
-                _context.SaveChanges();
-                result = user.UserId.ToString();
+                existingUser.Firstname = user.Firstname;
+                existingUser.Lastname = user.Lastname;
+                existingUser.Email = user.Email;
+                existingUser.PhoneNumber = user.PhoneNumber;
+                existingUser.Password = user.Password;
+                existingUser.Username = user.Username;
+
+                await _context.SaveChangesAsync();
+                return true;
             }
-            return result;
+
+            return false;
         }
 
-        public string DeleteUser(User user)
+        public async Task<bool> DeleteUserAsync(User user)
         {
-            var usr = _context.Users.Where(user => user.UserId == user.UserId).FirstOrDefault() ?? null;
-            if (usr != null)
+            var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.UserId == user.UserId);
+
+            if (existingUser != null)
             {
-                _context.Remove(usr);
-                _context.SaveChanges();
-                return usr.UserId.ToString();
+                _context.Users.Remove(existingUser);
+                await _context.SaveChangesAsync();
+                return true;
             }
 
-            return "User deleted successfully";
+            return false;
         }
 
-        public IEnumerable<User> GetAllUsers()
-        {
-            var users = _context.Users.ToList();
-            return users;
-        }
-
-        public User GetUserByUserId(int id)
-        {
-            var user = _context.Users.Where(user => user.UserId == id).FirstOrDefault() ?? null;
-            return user;
-        }
-
-        public string UpdateUser(User user)
-        {
-            var usr = _context.Users.Where(user => user.UserId == user.UserId).FirstOrDefault() ?? null;
-
-            if (usr != null)
-            {
-                usr.Firstname = user.Firstname;
-                usr.Lastname = user.Lastname;
-                usr.Email = user.Email;
-                usr.PhoneNumber = user.PhoneNumber;
-                usr.Password = user.Password;
-                usr.Username = user.Username;
-                _context.SaveChanges();
-                return usr.UserId.ToString();
-            }
-            return "Updated user";
-        }
-        
         public void Dispose()
         {
             _context?.Dispose();

@@ -1,7 +1,8 @@
 ﻿using LinkedIn_Relationship_Manager.Models;
 using LinkedIn_Relationship_Manager.Repositories.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace LinkedIn_Relationship_Manager.Controllers
 {
@@ -9,16 +10,17 @@ namespace LinkedIn_Relationship_Manager.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IUser _userrepo;
+        private readonly IUser _userRepo;
 
-        public UserController(IUser usr)
+        public UserController(IUser userRepo)
         {
-            _userrepo = usr;
+            _userRepo = userRepo;
         }
+
         [HttpGet]
-        public ActionResult<List<User>> GetAllUsers()
+        public async Task<ActionResult<IEnumerable<User>>> GetAllUsers()
         {
-            var users = _userrepo.GetAllUsers();
+            var users = await _userRepo.GetAllUsersAsync();
             if (users == null)
             {
                 return NotFound();
@@ -26,28 +28,54 @@ namespace LinkedIn_Relationship_Manager.Controllers
             return Ok(users);
         }
 
-        [HttpGet("{id}")] //or [Route("{id}")]
-        public ActionResult<List<User>> GetUserByUserId(int id)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<User>> GetUserByUserId(int id)
         {
-            var users = _userrepo.GetUserByUserId(id);
-            if (users is null)
+            var user = await _userRepo.GetUserByUserIdAsync(id);
+            if (user == null)
             {
-                return NotFound("User Not Found! ");
+                return NotFound("User Not Found!");
             }
-            return Ok(users);
+            return Ok(user);
         }
 
         [HttpPost]
         [Route("Creates")]
-        public ActionResult Create(User user)
+        public async Task<ActionResult<string>> Create(User user)
         {
-            var usr = _userrepo.CreateUser(user);
-            if (usr == null)
+            var userId = await _userRepo.CreateUserAsync(user);
+            if (userId == 0) // Assuming UserId is an integer
             {
                 return BadRequest("Failed to create user");
             }
 
-            return Ok("Create user! " + user);
+            return Ok($"User created successfully. UserId: {userId}");
+        }
+
+        [HttpPut]
+        [Route("Updates")]
+        public async Task<ActionResult<string>> Update(User user)
+        {
+            var success = await _userRepo.UpdateUserAsync(user);
+            if (!success)
+            {
+                return BadRequest("Failed to update user");
+            }
+
+            return Ok($"User updated successfully. UserId: {user.UserId}");
+        }
+
+        [HttpDelete]
+        [Route("Deletes")]
+        public async Task<ActionResult<string>> Delete(User user)
+        {
+            var success = await _userRepo.DeleteUserAsync(user);
+            if (!success)
+            {
+                return BadRequest("Failed to delete user");
+            }
+
+            return Ok($"User deleted successfully. UserId: {user.UserId}");
         }
     }
 }
