@@ -1,22 +1,16 @@
-﻿namespace LinkedIn_Relationship_Manager.Repositories.Interfaces
+﻿using LinkedIn_Relationship_Manager.Models;
+
+namespace LinkedIn_Relationship_Manager.Repositories.Interfaces
 {
     public interface IMessage
     {
-        Guid MessageId { get; }
-        string Body { get; set; }
+        Task<string> GetMessageByMessageIdAsync(int id);
+        Task<int> GetMessageCountAsync();
+        Task<Message> CreateMessageAsync(Message message);
+        Task<Message> UpdateMessageAsync(Message message);
+        Task<Message> DeleteMessageAsync(Message message);
+        Task<string> PromptChatGPT(string prompt);
+        
 
-        DateTime SendDate { get; set; }
-
-        DateTime CreatedAt { get; set; }
-
-        string Subject { get; set; }
-
-        string Recipient { get; set; }
-
-        string Status { get; set; }
-
-        string MessageType { get; set; }
-
-        string Comments { get; set; }
     }
 }

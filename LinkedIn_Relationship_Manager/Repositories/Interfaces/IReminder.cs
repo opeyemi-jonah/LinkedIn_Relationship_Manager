@@ -1,21 +1,22 @@
-﻿namespace LinkedIn_Relationship_Manager.Repositories.Interfaces
+﻿using LinkedIn_Relationship_Manager.Models;
+
+namespace LinkedIn_Relationship_Manager.Repositories.Interfaces
 {
     public interface IReminder
     {
-        int ReminderId { get; set; }
+        Task<Reminder> GetReminderByReminderIdAsync(int reminderId);
+        Task<IEnumerable<Reminder>> GetAllRemindersAsync();
 
-        string Title { get; set; }
+        Task<Reminder> GetReminderByUserIdAsync(int userId);
 
-        DateTime ScheduledAt { get; set; }
+        Task<Reminder> GetReminderByContactId(int contactId);
 
-        DateTime CreatedAt { get; set; }
+        Task<Reminder> CreateReminderAsync(Reminder reminder);
 
-        DateTime UpdatedAt { get; set; }
+        Task<Reminder> UpdateReminderAsync(Reminder reminder);
 
-        DateTime TriggeredAt { get; set; }
+        Task<Reminder> DeleteReminderAsync(int reminderId);
 
-        string Status { get; set; }
-
-
+       
     }
 }

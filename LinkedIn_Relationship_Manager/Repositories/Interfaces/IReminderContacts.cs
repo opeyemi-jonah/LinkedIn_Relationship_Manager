@@ -2,9 +2,6 @@
 {
     public interface IReminderContacts
     {
-        Guid UserId { get; }
-        int ReminderId { get; }
 
-        int ContactId { get; }
     }
 }

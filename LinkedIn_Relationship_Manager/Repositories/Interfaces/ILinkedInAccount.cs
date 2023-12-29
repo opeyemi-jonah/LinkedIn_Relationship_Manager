@@ -4,10 +4,10 @@ namespace LinkedIn_Relationship_Manager.Repositories.Interfaces
 {
     public interface ILinkedInAccount
     {
-        Guid UserId { get; set; }
+        void GetLinkedInAccountById(int id);
+        void GetLinkedInAccountByUserId(int userId);
 
-        int LinkedInAccountId { get; set; }
+        void GetLinkedInAccountByEmail(string email);
 
-        string ProfileLink { get; set; }
     }
 }
